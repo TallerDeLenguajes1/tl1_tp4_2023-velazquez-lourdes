@@ -21,6 +21,7 @@ int main()
     int canTarea=0;
     printf("Ingrese la cantidad de taraeas:");
     scanf("%d", &canTarea);
+    fflush(stdin);
     Tarea **listaTarea = (Tarea**)malloc((canTarea)*sizeof(Tarea*));
     Tarea **listaTareaRealizadas = (Tarea**)malloc((canTarea)*sizeof(Tarea*));
     inicial(listaTarea, canTarea);
@@ -43,9 +44,9 @@ void CargarTarea(Tarea ** lista, int Cant)
         scanf("%d", &durac);
         fflush(stdin);
         printf("Descripcion:");
+        lista[i]->Descripion=(char*)malloc(sizeof(char)*strlen(descrip));
         gets(descrip);
         fflush(stdin);
-        lista[i]->Descripion=(char*)malloc(sizeof(char)*strlen(descrip));
         strcpy(lista[i]->Descripion, descrip);
         lista[i]->Duracion=durac;
     }
@@ -56,9 +57,13 @@ void mostrarTarea(Tarea **lista, int Cant)
     printf("Lista: \n");
     for (int i = 0; i < Cant; i++)
     {
+        if (lista[i] != NULL)
+        {
+        printf("=======================================\n");
         printf("Tarea N°: %d \n", lista[i]->TareaID);
         printf("Duracion: %d \n", lista[i]->Duracion);
         printf("Descripcion: %s \n", lista[i]->Descripion);
+        }
     }
     
 }
